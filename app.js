@@ -2,8 +2,12 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const goodsRouter = require("./routes/goods.js");
+const cartsRouter = require("./routes/carts.js");
+const connect = require("./schemas/index.js");
+connect();
 
 app.use(express.json());
+app.use("/api", [goodsRouter, cartsRouter]);
 
 // app.use(express.json())로 사용되는 req.body
 app.post("/", (req, res) => {
@@ -30,13 +34,6 @@ app.get("/:id", (req, res) => {
 
   res.send(" :id URI에 정상적으로 반환되었습니다.");
 });
-
-// app.get("/", (req, res) => {
-//   res.send("헬로 월드");
-// });
-
-// localhost:3000/api -> goodsRouter
-// app.use("/api", goodsRouter);
 
 app.listen(port, () => {
   console.log(port, "포트로 서버가 열렸어요!");
