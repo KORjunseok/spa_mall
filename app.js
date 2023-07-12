@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const goodsRouter = require("./routes/goods.js");
+const cartsRouter = require("./routes/carts.js");
 const connect = require("./schemas/index.js");
 connect();
 
 app.use(express.json());
-app.use("/api", [goodsRouter]);
+app.use("/api", [goodsRouter, cartsRouter]);
 
 // app.use(express.json())로 사용되는 req.body
 app.post("/", (req, res) => {
